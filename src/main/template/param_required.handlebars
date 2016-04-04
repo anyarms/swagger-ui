@@ -1,5 +1,24 @@
-<td class='code required'><label for='{{valueId}}'>{{name}}</label></td>
-<td>
+<div class="col-lg-7 col-md-7">
+	<div class="row parameter-row">
+		<div class="col-lg-4 col-md-4">
+			<div class='parameter-name required'><label for='{{valueId}}'>{{name}}</label></div>
+			<div class='required-parameter'>required</div>
+			
+			
+		</div>
+		<div class="col-lg-8 col-md-8">
+			<div class='parameter-type'>
+				{{{type}}}{{#if maxLength}}<span class="max-length"> ({{{maxLength}}})</span>{{/if}}, <span class='parameter-location'>in {{{paramType}}}</span>
+			</div>
+			<div class="description">
+				<span class="markdown">{{{description}}}</span>
+			</div>
+		</div>
+	</div>
+	<div class="row parameter-row">
+		<span class="model-signature"></span>
+	</div>
+{{!-- <div>
 	{{#if isBody}}
 		{{#if isFile}}
 			<input type="file" name='{{name}}' id='{{valueId}}'/>
@@ -24,9 +43,25 @@
 			{{/renderTextParam}}
 		{{/if}}
 	{{/if}}
-</td>
-<td>
-	<strong><span class="markdown">{{{description}}}</span></strong>
-</td>
-<td>{{{paramType}}}</td>
-<td><span class="model-signature"></span></td>
+</div> --}}
+
+
+</div>
+<div class="col-md-5 col-lg-5">
+<div class="code-column">
+	<div class="snippet">
+  	{{#if sampleJSON}}
+      	<div class="snippet_json">
+        	<pre><code>{{sampleJSON}}</code></pre>
+        	{{#if isParam}}<small class="notice" data-sw-translate></small>{{/if}}
+      	</div>
+  	{{/if}}
+  	{{#if sampleXML}}
+    	<div class="snippet_xml">
+      	<pre><code>{{sampleXML}}</code></pre>
+      	{{#if isParam}}<small class="notice" data-sw-translate></small>{{/if}}
+    	</div>
+  	{{/if}}
+  	</div>
+</div>
+</div>

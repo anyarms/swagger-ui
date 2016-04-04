@@ -1,0 +1,88 @@
+body, body p, body h1, body h2, body h3, body h4, body h5 {
+	font-family: 'Open Sans', sans-serif;
+}
+li {
+	list-style: none;
+	list-style-image: none;
+	list-style-type: none;
+}
+.code-column {
+	background: none;
+	border-left: 4px solid;
+	padding-left: 20px;
+	border-color: #cccccc;
+}
+
+.code-column p {
+  margin-left: 18px;
+}
+
+.code-column pre {
+  margin-right: 18px;
+  margin-left: 18px;
+}
+
+.code-column .prettyprint {
+  border-color: #cccccc;
+  padding-left: 18px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  
+}
+
+.code-column p {
+	padding-bottom: 10px;
+}
+
+.method {
+	text-transform: uppercase;
+	display: inline;
+}
+
+.propName {
+  /*text-align: right;*/
+  color: orange;
+}
+body .optional-parameter {
+  text-align: right;
+  color: #cccccc;
+}
+
+body .required-parameter {
+	text-align: right;
+	color: orange;
+	text
+}
+
+.propWrap {
+  font-family: 'Open Sans', sans-serif;
+  border-top: 1px solid;
+  border-color: #dcdcdc;
+}
+
+.parameter-name {
+	text-align: right;
+	font-style: bold;
+}
+
+.parameter-row {
+	border-style: solid;
+	border-bottom: 1px;
+	border-color: red;
+	padding-bottom: 30px;
+}
+
+.argument .row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.left-nav {
+  background-color: #dcdcdc;
+}
+
+.child-attributes {
+	padding: 20px;
+}
+
+

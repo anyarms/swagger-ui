@@ -115,7 +115,7 @@ SwaggerUi.partials.signature = (function () {
     var strongClose = '</span>';
 
     var optionHtml = function (label, value) {
-      return '<tr><td class="optionName">' + label + ':</td><td>' + value + '</td></tr>';
+      return '<span class="optionName">' + label + ': <span>' + value + '</span></span>';
     };
 
 
@@ -209,7 +209,7 @@ SwaggerUi.partials.signature = (function () {
     }
 
     function primitiveToHTML(schema) {
-      var html = '<span class="propType">';
+      var html = '<div class="parameter-type">';
       var type = schema.type || 'object';
 
       if (schema.$ref) {
@@ -245,7 +245,7 @@ SwaggerUi.partials.signature = (function () {
         html += schema.type;
       }
 
-      html += '</span>';
+      html += '</div>';
 
       return html;
     }
@@ -339,7 +339,7 @@ SwaggerUi.partials.signature = (function () {
       }
 
       if (options.length > 0) {
-        html = '<span class="propWrap">' + html + '<table class="optionsWrapper"><tr><th colspan="2">' + type + '</th></tr>' + options + '</table></span>';
+        html =  html + '<span class="optionsWrapper">' + options + '</span>';
       }
 
       return html;
@@ -348,7 +348,8 @@ SwaggerUi.partials.signature = (function () {
     function processModel(schema, name) {
       var type = schema.type || 'object';
       var isArray = schema.type === 'array';
-      var html = strongOpen + name + ' ' + (isArray ? '[' : '{') + strongClose;
+      // var html = strongOpen + name + ' ' + (isArray ? '[' : '{') + strongClose;
+      var html = '';
       var contents;
 
       if (name) {
@@ -357,7 +358,7 @@ SwaggerUi.partials.signature = (function () {
 
       if (isArray) {
         if (_.isArray(schema.items)) {
-          html += '<div>' + _.map(schema.items, function (item) {
+          html += '<div class="array">' + _.map(schema.items, function (item) {
             var type = item.type || 'object';
 
             if (_.isUndefined(item.$ref)) {
@@ -402,7 +403,7 @@ SwaggerUi.partials.signature = (function () {
               var cProperty = _.cloneDeep(property);
 
               var requiredClass = propertyIsRequired ? 'required' : '';
-              var html = '<span class="propName ' + requiredClass + '">' + name + '</span> (';
+              var html = '<div class="col-md-4 col-lg-4">'+ '<div class="parameter-name' + requiredClass + '">' + name + '</div>';
               var model;
               var propDescription;
 
@@ -427,17 +428,18 @@ SwaggerUi.partials.signature = (function () {
               html += primitiveToHTML(cProperty);
 
               if(!propertyIsRequired) {
-                html += ', <span class="propOptKey">optional</span>';
+                html += '<div class="optional-parameter">optional</div>';
+              } else {
+                html += '<div class="required-parameter">optional</div>';
               }
 
               if(property.readOnly) {
-                  html += ', <span class="propReadOnly">read only</span>';
+                  html += '<div class="readonly-parameter">read only</div>';
               }
 
-              html += ')';
 
               if (!_.isUndefined(propDescription)) {
-                html += ': ' + '<span class="propDesc">' + propDescription + '</span>';
+                html += '<div class="property-description"><span class="markdown">' + propDescription + '</span></div>';
               }
 
               if (cProperty.enum) {
@@ -445,7 +447,7 @@ SwaggerUi.partials.signature = (function () {
               }
 
               return '<div' + (property.readOnly ? ' class="readOnly"' : '') + '>' + primitiveToOptionsHTML(cProperty, html);
-            }).join(',</div>');
+            }).join('</div>') + '</div>';
           }
 
           if (contents) {
@@ -456,7 +458,8 @@ SwaggerUi.partials.signature = (function () {
         }
       }
 
-      return html + strongOpen + (isArray ? ']' : '}') + strongClose;
+      // return html + strongOpen + (isArray ? ']' : '}') + strongClose;
+      return html + '</div></div>';
     }
 
   };

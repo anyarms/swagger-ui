@@ -1,6 +1,7 @@
-  <ul class='operations' >
-    <li class='{{method}} operation' id='{{parentId}}_{{nickname}}'>
-      <div class='heading'>
+  <div class='operations' >
+    <li>
+    <div class='row' id='{{parentId}}_{{nickname}}'>
+{{!--       <div class='heading'>
         <h3>
           <span class='http_method'>
           <a href='#!/{{encodedParentId}}/{{nickname}}' class="toggleOperation">{{method}}</a>
@@ -15,15 +16,27 @@
           </li>
         </ul>
       </div>
-      <div class='content' id='{{parentId}}_{{nickname}}_content' style='display:none'>
+      <div class='content' id='{{parentId}}_{{nickname}}_content' style='display:none'> --}}
+      
+      <div class="col-md-12 col-lg-12">
+      <div class='heading'>
+        <h3>
+          {{{summary}}}
+        </h3>
+      </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-7 col-lg-7">
+      <div class='content' id='{{parentId}}_{{nickname}}_content'>
         {{#if deprecated}}
             <h4><span data-sw-translate>Warning: Deprecated</span></h4>
         {{/if}}
         {{#if description}}
-        <h4><span data-sw-translate>Implementation Notes</span></h4>
         <div class="markdown">{{{description}}}</div>
         {{/if}}
-        {{#oauth}}
+{{!--         {{#oauth}}
         <div class="auth">
         <span class="api-ic ic-error">{{/oauth}}
         {{#each oauth}}
@@ -32,24 +45,25 @@
             <div title='{{{this.description}}}'>{{this.scope}}</div>
           {{/each}}
           </div>
-        {{/each}}
-        {{#oauth}}</span></div>{{/oauth}}
+        {{/each}} --}}
+{{!--         {{#oauth}}</span></div>{{/oauth}}
         {{#oauth}}
         <div class='access'>
           <span class="api-ic ic-off" title="click to authenticate"></span>
         </div>
-        {{/oauth}}
-        {{#if type}}
-          <div class="response-class">
-            <h4><span data-sw-translate>Response Class</span> (<span data-sw-translate>Status</span> {{successCode}})</h4>
-              {{#if successDescription}}<div class="markdown">{{{successDescription}}}</div>{{/if}}
-            <p><span class="model-signature" /></p>
-            <br/>
-            <div class="response-content-type" />
-            </div>
-        {{/if}}
-
-        {{#if headers}}
+        {{/oauth}} --}}
+        </div>
+        
+      </div>
+      <div class="col-md-5 col-lg-5">
+        <div class="code-column">
+          <pre><div class="method">{{method}}</div> {{schemes}}://{{host}}{{basePath}}{{path}}</pre>
+        </div>
+        </div>
+      </div>
+      {{#if headers}}
+      <div class="row">
+        <div class="col-md-7 col-lg-7">
           <h4 data-sw-translate>Headers</h4>
           <table class="headers">
             <thead>
@@ -71,30 +85,40 @@
               {{/each}}
             </tbody>
           </table>
-        {{/if}}
-
+        </div>
+        <div class="col-md-5 col-lg-5"></div>
+      </div>
+      {{/if}}
+      <div class="row">
         <form accept-charset='UTF-8' class='sandbox'>
           <div style='margin:0;padding:0;display:inline'></div>
           {{#if parameters}}
+          <div class="col-lg-12 col-md-12">
           <h4 data-sw-translate>Parameters</h4>
-          <table class='fullwidth'>
-          <thead>
-            <tr>
-            <th style="width: 100px; max-width: 100px" data-sw-translate>Parameter</th>
-            <th style="width: 310px; max-width: 310px" data-sw-translate>Value</th>
-            <th style="width: 200px; max-width: 200px" data-sw-translate>Description</th>
-            <th style="width: 100px; max-width: 100px" data-sw-translate>Parameter Type</th>
-            <th style="width: 220px; max-width: 230px" data-sw-translate>Data Type</th>
-            </tr>
-          </thead>
-          <tbody class="operation-params">
+          </div>
+        </div>
+        <div class="row">
+          <div class="operation-params">
 
-          </tbody>
-          </table>
+          </div>
+        </div>
+
+          {{/if}}
+
+      </div
+
+          {{#if type}}
+            <div class="response-class">
+            <h4><span data-sw-translate>Response Class</span> (<span data-sw-translate>Status</span> {{successCode}})</h4>
+              {{#if successDescription}}<div class="markdown">{{{successDescription}}}</div>{{/if}}
+            <p><span class="model-signature" /></p>
+            <br/>
+            <div class="response-content-type" />
+            </div>
           {{/if}}
           {{#if responseMessages}}
           <div style='margin:0;padding:0;display:inline'></div>
-          <h4 data-sw-translate>Response Messages</h4>
+          <h4 data-sw-translate>Additional Response Codes</h4>
           <table class='fullwidth'>
             <thead>
             <tr>
@@ -110,14 +134,14 @@
           {{/if}}
           {{#if isReadOnly}}
           {{else}}
-          <div class='sandbox_header'>
+{{!--           <div class='sandbox_header'>
             <input class='submit' type='submit' value='Try it out!' data-sw-translate/>
             <a href='#' class='response_hider' style='display:none' data-sw-translate>Hide Response</a>
             <span class='response_throbber' style='display:none'></span>
-          </div>
+          </div> --}}
           {{/if}}
         </form>
-        <div class='response' style='display:none'>
+{{!--         <div class='response' style='display:none'>
           <h4 class='curl'>Curl</h4>
           <div class='block curl'></div>
           <h4 data-sw-translate>Request URL</h4>
@@ -132,7 +156,8 @@
           <div class='block response_code'></div>
           <h4 data-sw-translate>Response Headers</h4>
           <div class='block response_headers'></div>
-        </div>
+        </div> --}}
       </div>
-    </li>
-  </ul>
+      </div>
+      </div>
+</li>

@@ -329,7 +329,7 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
 
     var paramView = new SwaggerUi.Views.ParameterView({
       model: param,
-      tagName: 'tr',
+      tagName: 'div',
       readOnly: this.model.isReadOnly,
       swaggerOptions: this.options.swaggerOptions
     });
@@ -341,7 +341,7 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
     statusCode.defaultRendering = this.model.defaultRendering;
     var statusCodeView = new SwaggerUi.Views.StatusCodeView({
       model: statusCode,
-      tagName: 'tr',
+      tagName: 'div',
       router: this.router
     });
     $('.operation-status', $(this.el)).append(statusCodeView.render().el);

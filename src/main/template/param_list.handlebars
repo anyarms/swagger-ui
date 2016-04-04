@@ -1,19 +1,44 @@
-<td class='code{{#if required}} required{{/if}}'><label for='{{valueId}}'>{{name}}</label></td>
-<td>
-  <select {{#isArray this}} multiple="multiple"{{/isArray}} class="parameter {{#if required}} required {{/if}}" name="{{name}}" id="{{valueId}}">
+<div class="col-lg-7 col-md-7">
 
-    {{#unless required}}
-      <option {{#unless hasDefault}}  selected="" {{/unless}} value=''></option>
-    {{/unless}}
+	<div class='{{#if required}}required-parameter{{else}}optional-parameter{{/if}}'><label for='{{valueId}}'>{{name}}</label></div>
+	<div>
+	  <select {{#isArray this}} multiple="multiple"{{/isArray}} class="parameter {{#if required}} required {{/if}}" name="{{name}}" id="{{valueId}}">
 
-    {{#each allowableValues.descriptiveValues}}
+	    {{#unless required}}
+	      <option {{#unless hasDefault}}  selected="" {{/unless}} value=''></option>
+	    {{/unless}}
 
-      <option {{#if isDefault}} selected=""  {{/if}}  value='{{value}}'> {{value}} {{#if isDefault}} (default) {{/if}} </option>
+	    {{#each allowableValues.descriptiveValues}}
 
-    {{/each}}
+	      <option {{#if isDefault}} selected=""  {{/if}}  value='{{value}}'> {{value}} {{#if isDefault}} (default) {{/if}} </option>
 
-  </select>
-</td>
-<td class="markdown">{{#if required}}<strong>{{/if}}{{{description}}}{{#if required}}</strong>{{/if}}</td>
-<td>{{{paramType}}}</td>
-<td><span class="model-signature"></span></td>
+	    {{/each}}
+
+	  </select>
+	</div>
+	<div class="markdown">{{#if required}}<strong>{{/if}}{{{description}}}{{#if required}}</strong>{{/if}}</div>
+	<div>{{{paramType}}}</div>
+
+	<div><span class="model-signature"></span></div>
+	</div>
+	</div>
+</div>
+<div class="col-md-5 col-lg-5">
+<div class="code-column">
+	  <div class="snippet"> 
+  {{#if sampleJSON}}
+      <div class="snippet_json">
+        <pre><code>{{sampleJSON}}</code></pre>
+        {{#if isParam}}<small class="notice" data-sw-translate></small>{{/if}}
+      </div>
+  {{/if}}
+  {{#if sampleXML}}
+    <div class="snippet_xml">
+      <pre><code>{{sampleXML}}</code></pre>
+      {{#if isParam}}<small class="notice" data-sw-translate></small>{{/if}}
+    </div>
+  {{/if}}
+  </div>
+</div>
+</div>
+
