@@ -8,16 +8,30 @@
 		</div>
 		<div class="col-lg-8 col-md-8">
 			<div class='parameter-type'>
-				{{{type}}}{{#if maxLength}}<span class="max-length"> ({{{maxLength}}})</span>{{/if}}, <span class='parameter-location'>in {{{paramType}}}</span>
+				{{{type}}}, <span class='parameter-location'>in {{{paramType}}}</span>
 			</div>
 			<div class="description">
 				<span class="markdown">{{{description}}}</span>
 			</div>
+			{{#unless schema}}
+{{!-- 			<div class="options">
+				<span class="model-signature"></span>
+			</div> --}}
+			{{/unless}}
 		</div>
 	</div>
-	<div class="row parameter-row">
-		<span class="model-signature"></span>
-	</div>
+	{{#if schema}}
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="collapsed" role="button" data-toggle="collapse" href="#{{name}}Attributes" aria-expanded="false" aria-controls="collapse">{{name}} attributes</span>
+			</div>
+			<div class="panel-collapse collapse in" id="{{name}}Attributes">	
+				<div class="panel-body">
+					<div class="model-signature"></div>
+				</div>
+			</div>
+		</div>
+	{{/if}}
 {{!-- <div>
 	{{#if isBody}}
 		{{#if isFile}}

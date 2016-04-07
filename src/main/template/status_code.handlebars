@@ -1,4 +1,4 @@
-<td width='15%' class='code'>{{code}}</td>
+{{!-- <td width='15%' class='code'>{{code}}</td>
 <td class="markdown">{{{message}}}</td>
 <td width='50%'><span class="model-signature" /></td>
 <td class="headers">
@@ -13,4 +13,32 @@
       {{/each}}
     </tbody>
   </table>
-</td>
+</td> --}}
+
+
+<div class="row response-row">
+  <div class="col-md-7 col-lg-7">
+    <p>{{code}}: {{message}}</p>
+    <span class="model-signature" />
+  </div>
+  <div class="col-md-5 col-lg-5">
+      <div class="code-column">
+      <div class="snippet">
+      {{#if sampleJSON}}
+          <div class="snippet_json">
+            <pre><code>{{sampleJSON}}</code></pre>
+            {{#if isParam}}<small class="notice" data-sw-translate></small>{{/if}}
+          </div>
+      {{/if}} 
+      {{#if sampleXML}}
+        <div class="snippet_xml">
+          <pre><code>{{sampleXML}}</code></pre> 
+          {{#if isParam}}<small class="notice" data-sw-translate></small>{{/if}}
+        </div>
+      {{/if}}
+      </div>
+      </div>
+  </div>
+</div>
+
+

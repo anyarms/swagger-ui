@@ -51,7 +51,13 @@ body .optional-parameter {
 body .required-parameter {
 	text-align: right;
 	color: orange;
-	text
+}
+
+.response-row .optional-parameter {
+	display: none;
+}
+.response-row .required-parameter {
+	display: none;
 }
 
 .propWrap {
@@ -66,10 +72,20 @@ body .required-parameter {
 }
 
 .parameter-row {
+	padding-bottom: 20px;
+	padding-top: 20px;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+.row .parameter-row {
 	border-style: solid;
-	border-bottom: 1px;
-	border-color: red;
-	padding-bottom: 30px;
+	border-color: #cccccc;
+	border-top-width: 1px;
+}
+
+.parameter-row:first-of-type {
+	border-top-width: 0px;
 }
 
 .argument .row {
@@ -84,5 +100,10 @@ body .required-parameter {
 .child-attributes {
 	padding: 20px;
 }
+
+.panel-heading {
+	text-align: right;
+}
+
 
 

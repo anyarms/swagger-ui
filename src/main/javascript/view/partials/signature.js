@@ -115,7 +115,7 @@ SwaggerUi.partials.signature = (function () {
     var strongClose = '</span>';
 
     var optionHtml = function (label, value) {
-      return '<span class="optionName">' + label + ': <span>' + value + '</span></span>';
+      return label + ': ' + value;
     };
 
 
@@ -180,7 +180,15 @@ SwaggerUi.partials.signature = (function () {
         if (!seenModel) {
           seenModels.push(name);
 
-          html += '<br />' + processModel(schema, name);
+          html += '<div class="panel panel-default">';
+          html += '<div class="panel-heading">';
+          html += '<span class="collapsed" role="button" data-toggle="collapse" href="#' + name + 'Attributes" aria-expanded="false" aria-controls="collapse">';
+          html += name + ' attributes</span>';
+          html += '</div>';
+          html += '<div class="panel-collapse collapse in" id="' + name + 'Attributes">';
+          html += '<div class="panel-body">';
+          html += processModel(schema, name);
+          html += '</div></div></div>';
         }
       });
       /* jshint ignore:end */
@@ -374,20 +382,20 @@ SwaggerUi.partials.signature = (function () {
             } else {
               return addReference(item, simpleRef(item.$ref));
             }
-          }).join(',</div><div>');
+          }).join(',</div><div class="array-stuff">') + '</div>';
         } else if (_.isPlainObject(schema.items)) {
           if (_.isUndefined(schema.items.$ref)) {
             if (_.indexOf(['array', 'object'], schema.items.type || 'object') > -1) {
               if ((_.isUndefined(schema.items.type) || schema.items.type === 'object') && _.isUndefined(schema.items.properties)) {
                 html += '<div>object</div>';
               } else {
-                html += '<div>' + addReference(schema.items) + '</div>';
+                html += '<div class="reference">' + addReference(schema.items) + '</div>';
               }
             } else {
-              html += '<div>' + primitiveToOptionsHTML(schema.items, schema.items.type) + '</div>';
+              html += '<div class="options">' + primitiveToOptionsHTML(schema.items, schema.items.type) + '</div>';
             }
           } else {
-            html += '<div>' + addReference(schema.items, simpleRef(schema.items.$ref)) + '</div>';
+            html += '<div class="reference">' + addReference(schema.items, simpleRef(schema.items.$ref)) + '</div>';
           }
         } else {
           console.log('Array type\'s \'items\' property is not an array or an object, cannot process');
@@ -395,7 +403,7 @@ SwaggerUi.partials.signature = (function () {
         }
       } else {
         if (schema.$ref) {
-          html += '<div>' + addReference(schema, name) + '</div>';
+          html += '<div class="reference">' + addReference(schema, name) + '</div>';
         } else if (type === 'object') {
           if (_.isPlainObject(schema.properties)) {
             contents = _.map(schema.properties, function (property, name) {
@@ -403,7 +411,22 @@ SwaggerUi.partials.signature = (function () {
               var cProperty = _.cloneDeep(property);
 
               var requiredClass = propertyIsRequired ? 'required' : '';
-              var html = '<div class="col-md-4 col-lg-4">'+ '<div class="parameter-name' + requiredClass + '">' + name + '</div>';
+              var html = '<div class="col-md-4 col-lg-4">';
+              html += '<div class="parameter-name ' + requiredClass + '">' + name + '</div>';
+
+              if(!propertyIsRequired) {
+                html += '<div class="optional-parameter">optional</div>';
+              } else {
+                html += '<div class="required-parameter">required</div>';
+              }
+
+              if(property.readOnly) {
+                  html += '<div class="readonly-parameter">read only</div>';
+              }
+
+
+              html += '</div><div class="col-md-8 col-lg-8">'; //close col-4, open col-8
+
               var model;
               var propDescription;
 
@@ -427,16 +450,6 @@ SwaggerUi.partials.signature = (function () {
 
               html += primitiveToHTML(cProperty);
 
-              if(!propertyIsRequired) {
-                html += '<div class="optional-parameter">optional</div>';
-              } else {
-                html += '<div class="required-parameter">optional</div>';
-              }
-
-              if(property.readOnly) {
-                  html += '<div class="readonly-parameter">read only</div>';
-              }
-
 
               if (!_.isUndefined(propDescription)) {
                 html += '<div class="property-description"><span class="markdown">' + propDescription + '</span></div>';
@@ -446,7 +459,7 @@ SwaggerUi.partials.signature = (function () {
                 html += ' = <span class="propVals">[\'' + cProperty.enum.join('\', \'') + '\']</span>';
               }
 
-              return '<div' + (property.readOnly ? ' class="readOnly"' : '') + '>' + primitiveToOptionsHTML(cProperty, html);
+              return '<div class="row parameter-row' + (property.readOnly ? ' readOnly"' : '"') + '>' + primitiveToOptionsHTML(cProperty, html) + '</div>';
             }).join('</div>') + '</div>';
           }
 
@@ -454,12 +467,12 @@ SwaggerUi.partials.signature = (function () {
             html += contents + '</div>';
           }
         } else {
-          html += '<div>' + primitiveToOptionsHTML(schema, type) + '</div>';
+          html += '</div><div class="row parameter-row">' + primitiveToOptionsHTML(schema, type) + '</div>';
         }
       }
 
       // return html + strongOpen + (isArray ? ']' : '}') + strongClose;
-      return html + '</div></div>';
+      return html + '</div>';
     }
 
   };

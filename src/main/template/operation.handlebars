@@ -90,18 +90,18 @@
       </div>
       {{/if}}
       <div class="row">
-        <form accept-charset='UTF-8' class='sandbox'>
+        {{!-- <form accept-charset='UTF-8' class='sandbox'> --}}
           <div style='margin:0;padding:0;display:inline'></div>
           {{#if parameters}}
           <div class="col-lg-12 col-md-12">
-          <h4 data-sw-translate>Parameters</h4>
+            <h4 data-sw-translate>Parameters</h4>
           </div>
-        </div>
-        <div class="row">
-          <div class="operation-params">
+      </div>
+      <div class="row">
+        <div class="operation-params">
 
-          </div>
         </div>
+      </div>
 
           {{/if}}
 
@@ -109,28 +109,44 @@
 
           {{#if type}}
             <div class="response-class">
-            <h4><span data-sw-translate>Response Class</span> (<span data-sw-translate>Status</span> {{successCode}})</h4>
-              {{#if successDescription}}<div class="markdown">{{{successDescription}}}</div>{{/if}}
-            <p><span class="model-signature" /></p>
-            <br/>
-            <div class="response-content-type" />
+            
+
+            
+            <div class="row">
+            <div class="col-lg-12 col-md-12">
+              <h4><span data-sw-translate>Responses</span> </h4>
+              <p><span class="markdown">200{{#if successDescription}}: {{{successDescription}}}{{/if}}</span></p>
+            </div>
+            </div>
+            <div class="row response-row">
+              <div class="col-md-7 col-lg-7">
+                <span class="model-signature" /> 
+              </div>
+              <div class="col-md-5 col-lg-5">
+                <div class="code-column">
+                <div class="snippet">
+                {{#if sampleJSON}}
+                    <div class="snippet_json">
+                      <pre><code>{{sampleJSON}}</code></pre>
+                      {{#if isParam}}<small class="notice" data-sw-translate></small>{{/if}}
+                    </div>
+                {{/if}}
+                {{#if sampleXML}}
+                  <div class="snippet_xml">
+                    <pre><code>{{sampleXML}}</code></pre>
+                    {{#if isParam}}<small class="notice" data-sw-translate></small>{{/if}}
+                  </div>
+                {{/if}}
+                </div>
+              </div>
+              </div>
+            </div>
+            
             </div>
           {{/if}}
           {{#if responseMessages}}
-          <div style='margin:0;padding:0;display:inline'></div>
           <h4 data-sw-translate>Additional Response Codes</h4>
-          <table class='fullwidth'>
-            <thead>
-            <tr>
-              <th data-sw-translate>HTTP Status Code</th>
-              <th data-sw-translate>Reason</th>
-              <th data-sw-translate>Response Model</th>
-              <th data-sw-translate>Headers</th>
-            </tr>
-            </thead>
-            <tbody class="operation-status">
-            </tbody>
-          </table>
+            <div class="operation-status"></div>
           {{/if}}
           {{#if isReadOnly}}
           {{else}}
@@ -140,7 +156,7 @@
             <span class='response_throbber' style='display:none'></span>
           </div> --}}
           {{/if}}
-        </form>
+        {{!-- </form> --}}
 {{!--         <div class='response' style='display:none'>
           <h4 class='curl'>Curl</h4>
           <div class='block curl'></div>
