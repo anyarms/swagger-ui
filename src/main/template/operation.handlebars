@@ -108,19 +108,17 @@
       </div
 
           {{#if type}}
-            <div class="response-class">
-            
-
-            
+          <div class="response-class">
             <div class="row">
-            <div class="col-lg-12 col-md-12">
-              <h4><span data-sw-translate>Responses</span> </h4>
-              <p><span class="markdown">200{{#if successDescription}}: {{{successDescription}}}{{/if}}</span></p>
-            </div>
+              <div class="col-lg-7 col-md-7">
+                <h4><span data-sw-translate>Responses</span> </h4>
+                <p><span class="markdown">200{{#if successDescription}}: {{{successDescription}}}{{/if}}</span></p>
+              </div>
+              <div class="col-md-5 col-lg-5"></div>
             </div>
             <div class="row response-row">
               <div class="col-md-7 col-lg-7">
-                <span class="model-signature" /> 
+              <span class="model-signature"></span>
               </div>
               <div class="col-md-5 col-lg-5">
                 <div class="code-column">
@@ -138,12 +136,12 @@
                   </div>
                 {{/if}}
                 </div>
+                </div>
               </div>
-              </div>
-            </div>
-            
-            </div>
+            </div>            
+          </div>
           {{/if}}
+
           {{#if responseMessages}}
           <h4 data-sw-translate>Additional Response Codes</h4>
             <div class="operation-status"></div>
