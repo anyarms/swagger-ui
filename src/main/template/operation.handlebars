@@ -61,6 +61,7 @@
         </div>
         </div>
       </div>
+
       {{#if headers}}
       <div class="row">
         <div class="col-md-7 col-lg-7">
@@ -89,71 +90,63 @@
         <div class="col-md-5 col-lg-5"></div>
       </div>
       {{/if}}
+
+      {{#if parameters}}
       <div class="row">
         {{!-- <form accept-charset='UTF-8' class='sandbox'> --}}
-          <div style='margin:0;padding:0;display:inline'></div>
-          {{#if parameters}}
           <div class="col-lg-12 col-md-12">
             <h4 data-sw-translate>Parameters</h4>
           </div>
       </div>
       <div class="row">
         <div class="operation-params">
+        </div>
+      </div>
+      {{/if}}
 
+      {{#if type}}
+      <div class="row">
+        <div class="col-lg-12 col-md-12">
+          <h4 data-sw-translate>Responses</h4>
+        </div>
+      </div>
+      <div class="row response-row">
+        <div class="col-md-7 col-lg-7">
+          <span class="model-signature"></span>
+        </div>
+        <div class="col-md-5 col-lg-5">
+          <div class="code-column">
+            <div class="snippet">
+              <pre><code><div class="operation-response"></div></code></pre>
+            </div>
+          </div>
         </div>
       </div>
 
-          {{/if}}
+      {{/if}}
 
-      </div
-
-          {{#if type}}
-          <div class="response-class">
-            <div class="row">
-              <div class="col-lg-7 col-md-7">
-                <h4><span data-sw-translate>Responses</span> </h4>
-                <p><span class="markdown">200{{#if successDescription}}: {{{successDescription}}}{{/if}}</span></p>
-              </div>
-              <div class="col-md-5 col-lg-5"></div>
-            </div>
-            <div class="row response-row">
-              <div class="col-md-7 col-lg-7">
-              <span class="model-signature"></span>
-              </div>
-              <div class="col-md-5 col-lg-5">
-                <div class="code-column">
-                <div class="snippet">
-                {{#if sampleJSON}}
-                    <div class="snippet_json">
-                      <pre><code>{{sampleJSON}}</code></pre>
-                      {{#if isParam}}<small class="notice" data-sw-translate></small>{{/if}}
-                    </div>
-                {{/if}}
-                {{#if sampleXML}}
-                  <div class="snippet_xml">
-                    <pre><code>{{sampleXML}}</code></pre>
-                    {{#if isParam}}<small class="notice" data-sw-translate></small>{{/if}}
-                  </div>
-                {{/if}}
-                </div>
-                </div>
-              </div>
-            </div>            
-          </div>
-          {{/if}}
-
-          {{#if responseMessages}}
+      {{#if responseMessages}}
+      <div class="row">
+        <div class="col-lg-12 col-md-12">
           <h4 data-sw-translate>Additional Response Codes</h4>
-            <div class="operation-status"></div>
-          {{/if}}
-          {{#if isReadOnly}}
-          {{else}}
+        </div>
+      </div>
+      <div class="row response-row">
+        <div class="operation-status"></div>
+      </div>
+
+
+      {{/if}}
+
+      {{#if isReadOnly}}
+      {{else}}
 {{!--           <div class='sandbox_header'>
-            <input class='submit' type='submit' value='Try it out!' data-sw-translate/>
-            <a href='#' class='response_hider' style='display:none' data-sw-translate>Hide Response</a>
-            <span class='response_throbber' style='display:none'></span>
-          </div> --}}
-          {{/if}}
+        <input class='submit' type='submit' value='Try it out!' data-sw-translate/>
+        <a href='#' class='response_hider' style='display:none' data-sw-translate>Hide Response</a>
+        <span class='response_throbber' style='display:none'></span>
+      </div> --}}
+      {{/if}}
+
         {{!-- </form> --}}
 {{!--         <div class='response' style='display:none'>
           <h4 class='curl'>Curl</h4>

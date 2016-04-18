@@ -21,9 +21,19 @@ SwaggerUi.Views.StatusCodeView = Backbone.View.extend({
 
       var responseModelView = new SwaggerUi.Views.SignatureView({model: responseModel, tagName: 'div'});
       $('.model-signature', this.$el).append(responseModelView.render().el);
+      if (responseModel.sampleJSON) {
+        $('.statuscode-sample', this.$el).append(responseModel.sampleJSON);
+      } else {
+        $('.statuscode-sample', this.$el).html('');
+      }
     } else {
       $('.model-signature', this.$el).html('');
+      // $('.code-sample', this.$el).html('123');
     }
+
+
+
+    // $('.code-sample', this.$el).append('666');
     return this;
   }
 });

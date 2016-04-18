@@ -201,6 +201,7 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
         tagName: 'div'
       });
       $('.model-signature', $(this.el)).append(responseSignatureView.render().el);
+      $('.operation-response', $(this.el)).append(signatureModel.sampleJSON);
     } else {
       this.model.responseClassSignature = 'string';
       $('.model-signature', $(this.el)).html(this.model.type);
@@ -252,6 +253,8 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
       }
       this.addStatusCode(statusCode);
     }
+
+
 
     this.showSnippet();
     return this;
