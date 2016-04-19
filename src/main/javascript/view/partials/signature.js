@@ -342,7 +342,7 @@ SwaggerUi.partials.signature = (function () {
             enumString = '"' + schema.enum.join('", "') + '"';
           }
 
-          options += optionHtml('Enum', enumString);
+          // options += optionHtml('Enum', enumString);
         }
       }
 
