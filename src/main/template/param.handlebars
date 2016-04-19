@@ -69,12 +69,14 @@
 <div class="code-column">
 	  <div class="snippet">
   {{#if sampleJSON}}
+  <h5>Request Body</h5>
       <div class="snippet_json">
         <pre><code>{{sampleJSON}}</code></pre>
         {{#if isParam}}<small class="notice" data-sw-translate></small>{{/if}}
       </div>
   {{/if}}
   {{#if sampleXML}}
+  <h5>Request Body</h5>
     <div class="snippet_xml">
       <pre><code>{{sampleXML}}</code></pre>
       {{#if isParam}}<small class="notice" data-sw-translate></small>{{/if}}

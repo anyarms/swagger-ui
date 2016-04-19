@@ -28,12 +28,20 @@ SwaggerUi.Views.StatusCodeView = Backbone.View.extend({
       }
     } else {
       $('.model-signature', this.$el).html('');
-      // $('.code-sample', this.$el).html('123');
     }
 
-
-
-    // $('.code-sample', this.$el).append('666');
+    if (this.model.code === '400') {
+      $('.http-status', this.$el).append('Bad Request');
+    }
+    if (this.model.code === '401') {
+      $('.http-status', this.$el).append('Unauthorized');
+    }
+    if (this.model.code === '500') {
+      $('.http-status', this.$el).append('Internal Server Error');
+    }
+    if (this.model.code === '403') {
+      $('.http-status', this.$el).append('Forbidden');
+    }
     return this;
   }
 });

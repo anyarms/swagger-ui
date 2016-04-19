@@ -91,11 +91,21 @@ SwaggerUi.Views.MainView = Backbone.View.extend({
         if (auth.type === 'apiKey' && $('#apikey_button').length === 0) {
           button = new SwaggerUi.Views.ApiKeyButton({model: auth, router:  this.router}).render().el;
           $('.auth_main_container').append(button);
+          var keyAuth = new SwaggerClient.ApiKeyAuthorization(
+            this.model.name,
+            'apiKey',
+            this.model.in
+          );
+          this.router.api.clientAuthorizations.add(this.model.name, keyAuth);
+          this.router.load();
         }
 
         if (auth.type === 'basicAuth' && $('#basic_auth_button').length === 0) {
           button = new SwaggerUi.Views.BasicAuthButton({model: auth, router: this.router}).render().el;
           $('.auth_main_container').append(button);
+          var basicAuth = new SwaggerClient.PasswordAuthorization('basic', 'username', 'password');
+          this.router.api.clientAuthorizations.add(this.model.type, basicAuth);
+          this.router.load();
         }
       }
     }

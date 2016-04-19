@@ -115,7 +115,7 @@ SwaggerUi.partials.signature = (function () {
     var strongClose = '</span>';
 
     var optionHtml = function (label, value) {
-      return label + ': ' + value;
+      return '<div>' + label + ': ' + value + '</div>';
     };
 
 
@@ -447,7 +447,9 @@ SwaggerUi.partials.signature = (function () {
                   cProperty = resolveSchema(model.definition);
                 }
               }
-
+              if (name.length > 23) {
+                html += '<br/>';
+              }
               html += primitiveToHTML(cProperty);
 
 
@@ -456,7 +458,7 @@ SwaggerUi.partials.signature = (function () {
               }
 
               if (cProperty.enum) {
-                html += ' = <span class="propVals">[\'' + cProperty.enum.join('\', \'') + '\']</span>';
+                html += ' One of: <span class="propVals">\'' + cProperty.enum.join('\', \'') + '\'</span>';
               }
 
               return '<div class="row parameter-row' + (property.readOnly ? ' readOnly"' : '"') + '>' + primitiveToOptionsHTML(cProperty, html) + '</div>';

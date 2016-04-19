@@ -17,10 +17,6 @@ li {
   margin-left: 18px;
 }
 
-.code-column pre {
-  margin-right: 18px;
-  margin-left: 18px;
-}
 
 .code-column .prettyprint {
   border-color: #cccccc;
@@ -84,7 +80,7 @@ body .required-parameter {
 	border-top-width: 1px;
 }
 
-.parameter-row:first-of-type {
+.panel .parameter-row:first-of-type {
 	border-top-width: 0px;
 }
 
@@ -104,6 +100,24 @@ body .required-parameter {
 .panel-heading {
 	text-align: right;
 }
+
+.security-type {
+	text-transform: capitalize;
+}
+
+.root-parameter .parameter-row {
+	border-style: solid;
+	border-color: #cccccc;
+	border-top-width: 1px;
+}
+
+.response-row {
+	padding-right: 10px;
+	padding-left: 10px;
+
+}
+
+
 
 
 

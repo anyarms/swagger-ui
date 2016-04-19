@@ -62,15 +62,24 @@
 
 </div>
 <div class="col-md-5 col-lg-5">
+{{#if headers}}
+<div class="code-column">
+	<div class="snippet">
+		<pre><code>{{headers}}</code></pre>
+	</div>
+</div>
+{{/if}}
 <div class="code-column">
 	<div class="snippet">
   	{{#if sampleJSON}}
+  	<h5>Request Body</h5>
       	<div class="snippet_json">
         	<pre><code>{{sampleJSON}}</code></pre>
         	{{#if isParam}}<small class="notice" data-sw-translate></small>{{/if}}
       	</div>
   	{{/if}}
   	{{#if sampleXML}}
+  	<h5>Request Body</h5>
     	<div class="snippet_xml">
       	<pre><code>{{sampleXML}}</code></pre>
       	{{#if isParam}}<small class="notice" data-sw-translate></small>{{/if}}

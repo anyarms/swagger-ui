@@ -37,7 +37,7 @@ SwaggerUi.Views.ResourceView = Backbone.View.extend({
       operation.definitions = this.model.definitions; // make Json Schema available for JSonEditor in this operation
       this.addOperation(operation);
     }
-
+    
     $('.toggleEndpointList', this.el).click(this.callDocs.bind(this, 'toggleEndpointListForResource'));
     $('.collapseResource', this.el).click(this.callDocs.bind(this, 'collapseOperationsForResource'));
     $('.expandResource', this.el).click(this.callDocs.bind(this, 'expandOperationsForResource'));

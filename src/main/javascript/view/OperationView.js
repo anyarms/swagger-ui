@@ -254,7 +254,32 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
       this.addStatusCode(statusCode);
     }
 
+    var auth_hdr = '';
+    for (var akey in this.auths) {
+      if (this.auths[akey].type === 'basic') {
+        auth_hdr += 'Authorization: Basic a2VlcG1vdmluZzpub3RoaW5nMnNlZWhlcmU= <br/>';
+      }
+      if (this.auths[akey].type === 'apiKey') {
+        auth_hdr += 'Authorization: {{apiKey}} <br/>';
+      }
 
+    }
+    
+    $('.authorization-header', $(this.el)).append(auth_hdr);
+
+    var form = $('.sandbox', $(this.el));
+    var map = this.getInputMap(form);
+    var requestHeaders = this.model.getHeaderParams(map);
+    var req_hdr = '';
+    for (var hkey in requestHeaders) {
+      req_hdr += hkey + ': ' + requestHeaders[hkey] + '<br/>';
+    }
+
+    $('.request-headers', $(this.el)).html( req_hdr);
+    var contentType = 'application/json';
+    var curlCommand = this.model.asCurl(map, {responseContentType: contentType});
+    curlCommand = curlCommand.replace('!', '&#33;');
+    $( 'div.curl', $(this.el)).html('<pre>' + _.escape(curlCommand) + '</pre>');
 
     this.showSnippet();
     return this;
@@ -333,6 +358,7 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
     var paramView = new SwaggerUi.Views.ParameterView({
       model: param,
       tagName: 'div',
+      className: 'root-parameter',
       readOnly: this.model.isReadOnly,
       swaggerOptions: this.options.swaggerOptions
     });
