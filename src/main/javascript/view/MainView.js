@@ -110,6 +110,7 @@ SwaggerUi.Views.MainView = Backbone.View.extend({
       }
     }
 
+    $('.left-nav-menu').append('left nav');
     // Render the outer container for resources
     $(this.el).html(Handlebars.templates.main(this.model));
 
@@ -155,6 +156,40 @@ SwaggerUi.Views.MainView = Backbone.View.extend({
       swaggerOptions: this.options.swaggerOptions
     });
     $('#resources', this.el).append(resourceView.render().el);
+  },
+
+  leftNav: function(){
+  var html = '';
+  var apis = [];
+  apis.push({
+    name: 'avatax15rest',
+    location: 'https://raw.githubusercontent.com/Avalara/Swagger/master/avatax15/rest.yaml'
+  });
+  html +=   '<dl class="level1">';
+  for (var i = apis.length - 1; i >= 0; i--) {
+    html += '<dt class="level1 parent first"><span class="outer"><span class="inner"><span>';
+    html += apis[i].name ;
+    html += '</span></span></span></dt>';
+  }
+          // <% if defined? apis %>
+          // <% apis.each do |api| %>
+          //   <dt class="level1 parent first"><span class="outer"><span class="inner"><span><%= link_to get_title(api), "/#{api}.#{development? ? 'html' : 'php'}" %></span></span></span>
+          //     </dt>
+          //   <dd class="level1 parent first">
+          //     <dl class="level2">
+          //     <% tocify(api).each do |method| %>
+
+          //      <dt class="level2 notparent"><span class="outer"><span class="inner"><span><%= link_to method[0], "/#{api}.#{development? ? 'html' : 'php'}##{method[1]}" %></span></span></span></dt>
+          //      <dd></dd>
+          //     <% end %>
+          //     </dl>
+          //   </dd>
+          //     <% end %>
+            
+            
+          //   <% end %>
+  html += '</dl>';
+  return html;
   },
 
   clear: function(){

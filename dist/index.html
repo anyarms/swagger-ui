@@ -1,8 +1,10 @@
 
 <!DOCTYPE html>
 <html>
+<!-- <?php include('../../wp-load.php');
+?> -->
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
   <title>Avalara API Reference</title>
   <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
   <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
@@ -31,6 +33,13 @@
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <script src="http://code.jquery.com/jquery-1.9.0.js"></script> -->
 
+
+<link rel='stylesheet' id='avada-google-fonts-css'  href='http://fonts.googleapis.com/css?family=PT+Sans%3A400%2C400italic%2C700%2C700italic&#038;subset=latin&#038;' type='text/css' media='all' />
+<script type='text/javascript' src='../wp-includes/js/jquery/jquery.js'></script>
+<script type='text/javascript' src='../wp-includes/js/jquery/jquery-migrate.min.js'></script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+<link rel='stylesheet' id='avada-css'  href='../wp-content/themes/Avada/style.css' type='text/css' media='all' />
+<link rel='stylesheet' id='avada-css'  href='../wp-content/themes/avada-avalara/style.css' type='text/css' media='all' />
 
   <!-- Some basic translations -->
   <!-- <script src='lang/translator.js' type='text/javascript'></script> -->
@@ -113,7 +122,18 @@
 
 </head>
 
-<body class="swagger-section">
+<body>
+
+<!-- ugh header -->
+<div id="wrapper">
+<!-- <?php avada_header_template(); ?> -->
+
+
+<!-- end ugh header -->
+
+
+<div class="container-fluid">
+<div class="swagger-section">
 <!-- <div id='header'>
   <div class="swagger-ui-wrap">
     <a id="logo" href="http://swagger.io">swagger</a>
@@ -125,9 +145,10 @@
   </div>
 </div> -->
 
-<div id="message-bar" class="swagger-ui-wrap" data-sw-translate>&nbsp;</div>
-<div class="container">
+<!-- <div id="message-bar" class="swagger-ui-wrap" data-sw-translate>&nbsp;</div> -->
   <div id="swagger-ui-container" class="swagger-ui-wrap"></div>
+</div>
+</div>
 </div>
 </body>
 </html>

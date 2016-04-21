@@ -1,25 +1,26 @@
 <div class="col-lg-7 col-md-7">
-
-	<div class='{{#if required}}required-parameter{{else}}optional-parameter{{/if}}'><label for='{{valueId}}'>{{name}}</label></div>
-	<div>
-	  <select {{#isArray this}} multiple="multiple"{{/isArray}} class="parameter {{#if required}} required {{/if}}" name="{{name}}" id="{{valueId}}">
-
-	    {{#unless required}}
-	      <option {{#unless hasDefault}}  selected="" {{/unless}} value=''></option>
-	    {{/unless}}
-
-	    {{#each allowableValues.descriptiveValues}}
-
-	      <option {{#if isDefault}} selected=""  {{/if}}  value='{{value}}'> {{value}} {{#if isDefault}} (default) {{/if}} </option>
-
-	    {{/each}}
-
-	  </select>
+	<div class="row parameter-row">
+	<div class="col-lg-4 col-md-4">
+		<div class='parameter-name'><label for='{{valueId}}'>{{name}}</label></div>
+		{{#if required}}
+		<div class='required-parameter'>required</div>
+		{{else}}
+		<div class='optional-parameter'>optional</div>
+		{{/if}}
 	</div>
-	<div class="markdown">{{#if required}}<strong>{{/if}}{{{description}}}{{#if required}}</strong>{{/if}}</div>
-	<div>{{{paramType}}}</div>
-
-	<div><span class="model-signature"></span></div>
+	<div class="col-lg-8 col-md-8">
+		<div class='parameter-type'>
+			{{{type}}}, <span class='parameter-location'>in {{{paramType}}}</span>
+		</div>
+		<div class="description">
+			<span class="markdown">{{{description}}}</span>
+		</div>
+		{{#unless schema}}
+		<div class="options">
+			{{!-- <span class="model-signature"></span> --}}
+		</div>
+		{{/unless}}
+	</div>
 	</div>
 	</div>
 </div>

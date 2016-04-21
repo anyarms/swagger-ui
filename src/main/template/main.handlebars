@@ -1,4 +1,17 @@
 <div class="row">
+    <div class="col-lg-2 col-md-2">
+         <div id="nextendaccordionmenuwidget-4" class="widget NextendAccordionMenuWidget">
+         <div id="nextend-accordion-menu-nextendaccordionmenuwidget-4" class="">
+        <div class="nextend-accordion-menu-inner ">
+        <div class="nextend-accordion-menu-inner-container">
+          <div class="left-nav-menu"></div>
+        </div>
+        </div>
+        </div>
+        </div>
+  </div>  <!-- end left-nav -->
+
+<div class="col-lg-10 col-md-10">
 <div class='row' id='api_info'>
   {{#if info}}
   <div class="col-md-7 col-lg-7">
@@ -28,10 +41,11 @@
   </div>
   
   {{/if}}
+
 </div>
-</div>
-<div class='row' id='resources_container'>
+<div id='resources_container'>
   <ul id='resources'></ul>
+</div>
 
   <div class="footer">
     <h4 style="color: #999">[ <span style="font-variant: small-caps">base url</span>: {{basePath}}
@@ -54,4 +68,5 @@
       {{#if info.contact.url}}<div class='info_url' data-sw-translate>See more at <a href="{{info.contact.url}}">{{info.contact.url}}</a></div>{{/if}}
       {{#if info.contact.email}}<div class='info_email'><a target="_parent" href="mailto:{{info.contact.email}}?subject={{info.title}}" data-sw-translate>Contact us</a></div>{{/if}}
     </div>
+</div>
 </div>
