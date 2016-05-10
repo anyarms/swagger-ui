@@ -20,7 +20,6 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
     var modelType = this.model.modelSignature.type;
     var modelDefinitions = this.model.modelSignature.definitions;
     var schema = this.model.schema || {};
-    var consumes = this.model.consumes || [];
 
 
     if (typeof type === 'undefined') {
@@ -45,7 +44,7 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
     }
 
     this.model.hasDefault = (typeof this.model.default !== 'undefined');
-    this.model.valueId = 'm' + this.model.name + Math.random();
+    this.model.valueId = 'm' + this.model.name + Math.floor((Math.random() * 10000) + 1 );
 
     if (this.model.allowableValues) {
       this.model.isList = true;
@@ -64,14 +63,14 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
       signature: SwaggerUi.partials.signature.getParameterModelSignature(modelType, modelDefinitions),
       defaultRendering: this.model.defaultRendering
     };
+    var signatureView = new SwaggerUi.Views.SignatureView({model: signatureModel, tagName: 'div'});
 
     if (isJSON) {
-      var signatureView = new SwaggerUi.Views.SignatureView({model: signatureModel, tagName: 'div'});
+      
       $('.model-signature', $(this.el)).append(signatureView.render().el);
       $('.json_request', $(this.el)).append('<pre>' + this.model.sampleJSON + '</pre>');
     } 
     if (isXML) {
-      var signatureView = new SwaggerUi.Views.SignatureView({model: signatureModel, tagName: 'div'});
       $('.model-signature', $(this.el)).append(signatureView.render().el);
       var output = document.createElement('pre');
       output.appendChild(document.createTextNode(signatureModel.sampleXML));
