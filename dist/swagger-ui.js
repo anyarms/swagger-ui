@@ -26740,7 +26740,7 @@ SwaggerUi.partials.signature = (function () {
           html += '<span class="collapsed" role="button" data-toggle="collapse" href="#' + name.split(' ').join('_') + num + 'Attributes" aria-expanded="false" aria-controls="collapse">';
           html += name + ' attributes</span>';
           html += '</div>';
-          html += '<div class="panel-collapse collapse" id="' + name + num + 'Attributes">';
+          html += '<div class="panel-collapse collapse" id="' + name.split(' ').join('_') + num + 'Attributes">';
           html += '<div class="panel-body">';
           html += processModel(schema, name);
           html += '</div></div></div>';
