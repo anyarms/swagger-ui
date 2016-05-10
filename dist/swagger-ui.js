@@ -26190,7 +26190,7 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
     }
 
     this.model.hasDefault = (typeof this.model.default !== 'undefined');
-    this.model.valueId = 'm' + this.model.name + Math.floor((Math.random() * 10000) + 1 );
+    this.model.valueId = 'm' + this.model.name.split(' ').join('_') + Math.floor((Math.random() * 10000) + 1 );
 
     if (this.model.allowableValues) {
       this.model.isList = true;
