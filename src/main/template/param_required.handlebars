@@ -23,9 +23,9 @@
 	{{#if schema}}
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<span class="collapsed" role="button" data-toggle="collapse" href="#{{name}}Attributes" aria-expanded="false" aria-controls="collapse">{{name}} attributes</span>
+				<span class="collapsed" role="button" data-toggle="collapse" href="#{{valueId}}Attributes" aria-expanded="false" aria-controls="collapse">{{name}} attributes</span>
 			</div>
-			<div class="panel-collapse collapse in" id="{{name}}Attributes">	
+			<div class="panel-collapse collapse" id="{{valueId}}Attributes">	
 				<div class="panel-body">
 					<div class="model-signature"></div>
 				</div>
@@ -70,21 +70,10 @@
 </div>
 {{/if}}
 <div class="code-column">
-	<div class="snippet">
-  	{{#if sampleJSON}}
+	{{#if sampleJSON}} {{!-- TERRIBLE --}}
   	<h5>Request Body</h5>
-      	<div class="snippet_json">
-        	<pre><code>{{sampleJSON}}</code></pre>
-        	{{#if isParam}}<small class="notice" data-sw-translate></small>{{/if}}
-      	</div>
-  	{{/if}}
-  	{{#if sampleXML}}
-  	<h5>Request Body</h5>
-    	<div class="snippet_xml">
-      	<pre><code>{{sampleXML}}</code></pre>
-      	{{#if isParam}}<small class="notice" data-sw-translate></small>{{/if}}
-    	</div>
-  	{{/if}}
-  	</div>
+    <div class="json_request"></div>
+    <div class="xml_request"></div>
+    {{/if}}
 </div>
 </div>

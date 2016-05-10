@@ -64,7 +64,6 @@ body .required-parameter {
 
 .parameter-name {
 	text-align: right;
-	font-style: bold;
 }
 
 .parameter-row {
@@ -72,6 +71,9 @@ body .required-parameter {
 	padding-top: 20px;
 	padding-right: 10px;
 	padding-left: 10px;
+	border-right-width: 0px;
+    border-left-width: 0px;
+    border-bottom-width: 0px;
 }
 
 .row .parameter-row {
@@ -111,7 +113,39 @@ body .required-parameter {
 	border-top-width: 1px;
 }
 
+/* ADN overrides*/
 
+pre {
+	max-height: none;
+}
+
+pre code {
+	font-size: small;
+}
+
+ul, ol {
+	padding-left: 0px;
+}
+
+.markdown p {
+	font-size: small;
+}
+
+label {
+	font-weight: normal;
+}
+
+#main .fusion-row {
+	max-width: none;
+}
+
+#content {
+	width: 80%;
+}
+
+.nextend-accordian-menu-inner {
+	max-width: 200px;
+}
 
 
 

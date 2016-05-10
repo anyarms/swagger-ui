@@ -179,13 +179,14 @@ SwaggerUi.partials.signature = (function () {
 
         if (!seenModel) {
           seenModels.push(name);
+          var num = Math.floor((Math.random() * 100000) + 1);
 
           html += '<div class="panel panel-default">';
           html += '<div class="panel-heading">';
-          html += '<span class="collapsed" role="button" data-toggle="collapse" href="#' + name + 'Attributes" aria-expanded="false" aria-controls="collapse">';
+          html += '<span class="collapsed" role="button" data-toggle="collapse" href="#' + name + num + 'Attributes" aria-expanded="false" aria-controls="collapse">';
           html += name + ' attributes</span>';
           html += '</div>';
-          html += '<div class="panel-collapse collapse in" id="' + name + 'Attributes">';
+          html += '<div class="panel-collapse collapse" id="' + name + num + 'Attributes">';
           html += '<div class="panel-body">';
           html += processModel(schema, name);
           html += '</div></div></div>';
@@ -412,7 +413,7 @@ SwaggerUi.partials.signature = (function () {
 
               var requiredClass = propertyIsRequired ? 'required' : '';
               var html = '<div class="col-md-4 col-lg-4">';
-              html += '<div class="parameter-name ' + requiredClass + '">' + name + '</div>';
+              html += '<div class="parameter-name ' + requiredClass + '"><label>' + name + '</label></div>';
 
               if(!propertyIsRequired) {
                 html += '<div class="optional-parameter">optional</div>';
@@ -680,7 +681,8 @@ SwaggerUi.partials.signature = (function () {
     }).join('');
 
     if (!name) {
-      return getErrorMessage('Node name is not provided');
+      // return getErrorMessage('Node name is not provided');
+      return value;
     }
 
     str = [
@@ -851,7 +853,11 @@ SwaggerUi.partials.signature = (function () {
 
   function getErrorMessage (details) {
     details = details ? ': ' + details : '';
-    return '<!-- invalid XML' + details + ' -->';
+    if (details) {
+      return '<!-- invalid XML' + details + ' -->';
+    } else { 
+      return '';
+    }
   }
 
   function createSchemaXML (name, definition, models, config) {

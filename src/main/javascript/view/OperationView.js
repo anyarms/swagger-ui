@@ -167,7 +167,7 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
     signatureModel = null;
     produces = this.model.produces;
     isXML = this.contains(produces, 'xml');
-    isJSON = isXML ? this.contains(produces, 'json') : true;
+    isJSON = this.contains(produces, 'json');
 
     if (this.model.successResponse) {
       successResponse = this.model.successResponse;
@@ -180,7 +180,7 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
           signatureModel = {
             sampleJSON: isJSON ? JSON.stringify(SwaggerUi.partials.signature.createJSONSample(value), void 0, 2) : false,
             isParam: false,
-            sampleXML: isXML ? SwaggerUi.partials.signature.createXMLSample(value.definition, value.models) : false,
+            sampleXML: isXML ? SwaggerUi.partials.signature.createXMLSample(value.definition, value.models, false) : false,
             signature: SwaggerUi.partials.signature.getModelSignature(value.name, value.definition, value.models, value.modelPropertyMacro)
           };
         }
@@ -188,8 +188,13 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
     } else if (this.model.responseClassSignature && this.model.responseClassSignature !== 'string') {
       signatureModel = {
         sampleJSON: this.model.responseSampleJSON,
+        sampleXML: this.model.responseSampleXML,
         isParam: false,
         signature: this.model.responseClassSignature
+      };
+    } else {
+      signatureModel = {
+        signature: SwaggerUi.partials.signature.getPrimitiveSignature(value)
       };
     }
     $(this.el).html(Handlebars.templates.operation(this.model));
@@ -201,7 +206,14 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
         tagName: 'div'
       });
       $('.model-signature', $(this.el)).append(responseSignatureView.render().el);
-      $('.operation-response', $(this.el)).append(signatureModel.sampleJSON);
+      if (signatureModel.sampleJSON && isJSON) {
+        $('.operation-response', $(this.el)).append('<pre>' + signatureModel.sampleJSON + '</pre>');
+      }
+      if (signatureModel.sampleXML && isXML) {
+        var output = document.createElement('pre');
+        output.appendChild(document.createTextNode(signatureModel.sampleXML));
+        $('.operation-response', $(this.el)).append(output);
+      }
     } else {
       this.model.responseClassSignature = 'string';
       $('.model-signature', $(this.el)).html(this.model.type);
@@ -337,6 +349,9 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
     // Render a parameter
     param.consumes = consumes;
     param.defaultRendering = this.model.defaultRendering;
+    param.isXML = this.model.isXML;
+    param.isJSON = this.model.isJSON;
+
 
     // Copy this param JSON spec so that it will be available for JsonEditor
     if(param.schema){

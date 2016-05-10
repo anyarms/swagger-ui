@@ -12,7 +12,7 @@ SwaggerUi.Views.StatusCodeView = Backbone.View.extend({
 
     if (this.router.api.models.hasOwnProperty(this.model.responseModel)) {
       var responseModel = {
-        sampleJSON: JSON.stringify(SwaggerUi.partials.signature.createJSONSample(value), void 0, 2),
+        sampleJSON: this.model.isJSON ? JSON.stringify(SwaggerUi.partials.signature.createJSONSample(value), void 0, 2) : false,
         sampleXML: this.model.isXML ? SwaggerUi.partials.signature.createXMLSample(this.model.schema, value.models) : false,
         isParam: false,
         signature: SwaggerUi.partials.signature.getModelSignature(this.model.responseModel, value, this.router.api.models),
@@ -22,7 +22,12 @@ SwaggerUi.Views.StatusCodeView = Backbone.View.extend({
       var responseModelView = new SwaggerUi.Views.SignatureView({model: responseModel, tagName: 'div'});
       $('.model-signature', this.$el).append(responseModelView.render().el);
       if (responseModel.sampleJSON) {
-        $('.statuscode-sample', this.$el).append(responseModel.sampleJSON);
+        $('.statuscode-sample', this.$el).append('<pre>' + responseModel.sampleJSON+ '</pre>');
+      }
+      if (responseModel.sampleXML){
+        var output = document.createElement('pre');
+        output.appendChild(document.createTextNode(responseModel.sampleXML));
+        $('.statuscode-sample', this.$el).append(output);
       } else {
         $('.statuscode-sample', this.$el).html('');
       }
