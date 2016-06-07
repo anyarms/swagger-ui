@@ -289,9 +289,18 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
 
     $('.request-headers', $(this.el)).html( req_hdr);
     var contentType = 'application/json';
+
     var curlCommand = this.model.asCurl(map, {responseContentType: contentType});
     curlCommand = curlCommand.replace('!', '&#33;');
-    $( 'div.curl', $(this.el)).html('<pre>' + _.escape(curlCommand) + '</pre>');
+
+    var req_url = this.model.method.toUpperCase() + ' ';
+    req_url = req_url + this.model.schemes + '://' + this.model.host;
+    if (this.model.basePath !== '/') {
+      req_url = req_url + this.model.basePath;
+    }
+    req_url = req_url + this.model.path;
+    $('.request_url', $(this.el)).append(req_url);
+
 
     this.showSnippet();
     return this;

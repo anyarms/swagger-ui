@@ -752,15 +752,7 @@ this["Handlebars"]["templates"]["operation"] = Handlebars.template({"1":function
   if (stack1 != null) { buffer += stack1; }
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.description : depth0), {"name":"if","hash":{},"fn":this.program(3, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
-  buffer += "        </div>\n        \n      </div>\n      <div class=\"col-md-5 col-lg-5\">\n        <div class=\"code-column\">\n          <div class='block request_url'></div>\n          <h5>URL</h5>\n          <pre><div class=\"method\">"
-    + escapeExpression(((helper = (helper = helpers.method || (depth0 != null ? depth0.method : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"method","hash":{},"data":data}) : helper)))
-    + "</div> <span>"
-    + escapeExpression(((helper = (helper = helpers.schemes || (depth0 != null ? depth0.schemes : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"schemes","hash":{},"data":data}) : helper)))
-    + "://"
-    + escapeExpression(((helper = (helper = helpers.host || (depth0 != null ? depth0.host : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"host","hash":{},"data":data}) : helper)))
-    + escapeExpression(((helper = (helper = helpers.basePath || (depth0 != null ? depth0.basePath : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"basePath","hash":{},"data":data}) : helper)))
-    + escapeExpression(((helper = (helper = helpers.path || (depth0 != null ? depth0.path : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"path","hash":{},"data":data}) : helper)))
-    + "</span></pre>\n          <h5>Headers</h5>\n          <pre><span class=\"authorization-header\"></span><span class=\"request-headers\"></span></pre>\n        </div>\n        </div>\n      </div>\n\n";
+  buffer += "        </div>\n        \n      </div>\n      <div class=\"col-md-5 col-lg-5\">\n        <div class=\"code-column\">\n          <h5>URL</h5>\n          <pre><div class='request_url'></div></pre>\n          <h5>Headers</h5>\n          <pre><span class=\"authorization-header\"></span><span class=\"request-headers\"></span></pre>\n        </div>\n        </div>\n      </div>\n\n";
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.headers : depth0), {"name":"if","hash":{},"fn":this.program(5, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   buffer += "\n";
@@ -25546,9 +25538,18 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
 
     $('.request-headers', $(this.el)).html( req_hdr);
     var contentType = 'application/json';
+
     var curlCommand = this.model.asCurl(map, {responseContentType: contentType});
     curlCommand = curlCommand.replace('!', '&#33;');
-    $( 'div.curl', $(this.el)).html('<pre>' + _.escape(curlCommand) + '</pre>');
+
+    var req_url = this.model.method.toUpperCase() + ' ';
+    req_url = req_url + this.model.schemes + '://' + this.model.host;
+    if (this.model.basePath !== '/') {
+      req_url = req_url + this.model.basePath;
+    }
+    req_url = req_url + this.model.path;
+    $('.request_url', $(this.el)).append(req_url);
+
 
     this.showSnippet();
     return this;
@@ -27310,6 +27311,20 @@ SwaggerUi.partials.signature = (function () {
     return value;
   };
 
+  var getPrimitiveSignature = function (schema) {
+    var type, items;
+
+    schema = schema || {};
+    items = schema.items || {};
+    type = schema.type || '';
+
+    switch (type) {
+      case 'object': return 'Object is not a primitive';
+      case 'array' : return 'Array[' + (items.format || items.type) + ']';
+      default: return schema.format || type;
+    }
+  };
+
   var createPrimitiveXML = function (descriptor) {
     var name = descriptor.name;
     var definition = descriptor.definition;
@@ -27502,7 +27517,8 @@ SwaggerUi.partials.signature = (function () {
       getParameterModelSignature: getParameterModelSignature,
       createParameterJSONSample: createParameterJSONSample,
       createSchemaXML: createSchemaXML,
-      createXMLSample: createXMLSample
+      createXMLSample: createXMLSample,
+      getPrimitiveSignature: getPrimitiveSignature
   };
 
 })();
