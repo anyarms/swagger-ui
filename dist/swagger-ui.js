@@ -26537,7 +26537,9 @@ SwaggerUi.Views.StatusCodeView = Backbone.View.extend({
     } else {
       $('.model-signature', this.$el).html('');
     }
-
+    if (this.model.code === '200') {
+      $('.http-status', this.$el).append('OK');
+    }
     if (this.model.code === '400') {
       $('.http-status', this.$el).append('Bad Request');
     }
